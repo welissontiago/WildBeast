@@ -22,7 +22,7 @@ a {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   border-radius: 5px;
 }
 
@@ -34,6 +34,27 @@ img {
     "header header header"
     "sidenav content anuncios"
     "footer footer footer";
+}
+
+@media (max-width: 1200px) {
+  .estrutura {
+    grid-template-areas:
+      "header header header"
+      "sidenav content content"
+      "sidenav anuncios anuncios"
+      "footer footer footer";
+  }
+}
+
+@media (max-width: 760px) {
+  .estrutura {
+    grid-template-areas:
+      "header header header"
+      "sidenav sidenav sidenav"
+      "content content content"
+      "anuncios anuncios anuncios"
+      "footer footer footer";
+  }
 }
 
 .header {
@@ -64,12 +85,27 @@ img {
   transition: 0.1s;
 }
 
-.header li {
+.header li + li {
   margin-left: 30px;
 }
 
 .header nav a:hover {
   background: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 760px) {
+  .header {
+    grid-template-columns: auto;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+  .header nav a {
+    font-size: 1rem;
+  }
+  .header li + li {
+    margin-left: 10px;
+  }
 }
 
 .sideNav {
@@ -94,6 +130,44 @@ img {
   background: #b07dfb;
 }
 
+@keyframes seta {
+  from {
+    right: 30px;
+  }
+  to {
+    right: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .sideNav {
+    position: relative;
+    overflow-x: auto;
+    touch-action: auto;
+    overflow: auto;
+  }
+  .sideNav::after {
+    content: "→";
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    color: rgba(0, 0, 0, 0.3);
+    animation: seta 0.5s ease-in 0s infinite alternate;
+  }
+  .sideNav ul {
+    display: flex;
+  }
+  .sideNav ul li {
+    flex: 1 0 60px;
+  }
+  .sideNav {
+    padding: 0 30px;
+  }
+  .sideNav li a {
+    margin: 30px 30px 30px 0;
+  }
+}
+
 .content {
   grid-area: content;
   max-width: 900px;
@@ -102,6 +176,12 @@ img {
   padding: 30px;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+}
+
+@media (max-width: 600px) {
+  .content {
+    grid-template-columns: auto;
+  }
 }
 
 .col-wide {
@@ -224,6 +304,7 @@ p {
   align-content: start;
   padding: 30px;
   gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .footer {
